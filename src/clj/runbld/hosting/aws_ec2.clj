@@ -34,7 +34,7 @@
 
 (s/defn this-host? :- s/Bool
   "Is this host in AWS EC2?"
-  ([]
+  ([_]
    (boolean (ec2-meta))))
 
 (defrecord AwsEc2Hosting [facts]
@@ -55,7 +55,9 @@
     "aws-ec2")
 
   (region        [x]
-    (region-name (hosting/datacenter x))))
+    (region-name (hosting/datacenter x)))
+
+  (virtual [_] true))
 
 (s/defn make
   ([facts]
